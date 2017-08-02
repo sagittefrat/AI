@@ -7,7 +7,7 @@ import os
 import random
 from gym import wrappers
 import time
-from play_game_options import *
+from MountainCar_DQN_options import *
 
 GAMMA = 0.9  # discount factor for target Q
 INITIAL_EPSILON = 0.5  # starting value of epsilon
