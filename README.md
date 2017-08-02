@@ -16,17 +16,18 @@
 has a 1 dimensional discrete state space with one dimensional discrete actions space: (F,S,H,G)
 
 
-* Sarsa with Softmax:*
-	Initial agent  |  Final agent 300 episodes
-	-------------  |  -------------
+* Sarsa with Softmax:
+
+	Initial agent |  Final agent 300 episodes
+	------------- |  -------------
 	![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-sarsa-softmax/openaigym.video.0.30505.video000008.gif)  
 	|
 	![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-sarsa-softmax/openaigym.video.0.30505.video000216.gif)
 	
 	
-* Q-learn with epsilon greedy:*
+* Q-learn with epsilon greedy:
 
-	Initial agent |  Final agent 300 episodes
+	Initial agent |  Final agent 100 episodes
 	------------- |  -------------
 	![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-q_learning-epsilon_greedy/openaigym.video.0.24474.video000000.gif)  
 	|
