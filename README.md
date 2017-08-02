@@ -16,19 +16,21 @@
 has a 1 dimensional discrete state space with one dimensional discrete actions space: (F,S,H,G)
 
 
-- Sarsa with Softmax:
-	Initial agent
-	Final agent 300 episodes
-- Q-learn with epsilon greedy:
-	Initial agent
+* Sarsa with Softmax:*
+	Initial agent  | Final agent 300 episodes
+	------------- | -------------
+	Content Cell  | Content Cell
+	Content Cell  | Content Cell
+	
+	
+* Q-learn with epsilon greedy:*
 
-
-![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-q_learning-epsilon_greedy/openaigym.video.0.24474.video000000.gif
-
-Final agent 100 episodes
-
-![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-q_learning-epsilon_greedy/openaigym.video.0.24474.video000064.gif)
-
+	Initial agent | Final agent 300 episodes
+	------------- | -------------
+	![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-q_learning-epsilon_greedy/openaigym.video.0.24474.video000000.gif)  
+	|
+	![animation](https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-q_learning-epsilon_greedy/openaigym.video.0.24474.video000064.gif)
+	
 
 
 #### MountainCar https://gym.openai.com/envs/MountainCar-v0
