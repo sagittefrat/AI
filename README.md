@@ -49,7 +49,7 @@ run with default parameters:
 	
 run Algorithm - sarsa, Policy - softmax Learning Rate - 0.2 Number of episodes - 300 :
 
-	python MountainCar_QL.py -a sarsa - p softmax -lr 0.2 -n 300
+	python MountainCar_QL.py -a sarsa -p softmax -lr 0.2 -n 300
 
 
 
