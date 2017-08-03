@@ -26,7 +26,7 @@ parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilo
                     help="Type of policy. (Default: epsilon_greedy)")
 parser.add_argument('-e', '--environment', default='FrozenLake-v0', choices=['Taxi-v2', 'Roulette-v0','FrozenLake-v0'],
                     help="Name of the environment provided in the OpenAI Gym. (Default: Taxi-v2)")
-parser.add_argument('-n', '--nepisode', default='2000', type=int,
+parser.add_argument('-n', '--nepisode', default='5000', type=int,
                     help="Number of episode. (Default: 20000)")
 parser.add_argument('-lr', '--learning_rate', default='0.1', type=float,
                     help="Learning rate. (Default: 0.1)")
@@ -65,7 +65,7 @@ def softmax(Q, beta=1.0):
     return factors / np.sum(factors)
 
 def select_a_with_softmax(s, Q, beta=1.0):
-    prob_a = softmax(Q[curr_s, :], beta=beta)
+    prob_a = softmax(Q[s, :], beta=beta)
     cumsum_a = np.cumsum(prob_a)
     return np.where(np.random.rand() < cumsum_a)[0][0]
 

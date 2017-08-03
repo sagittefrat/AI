@@ -40,7 +40,7 @@ result_dir = 'results/results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algor
 # Start monitoring the simulation for OpenAI Gym
 #env = wrappers.Monitor(env, result_dir, force=True)
 
-def learn(env,exploration_rate):
+def learn(env,exploration_rate,beta, beta_inc):
 	
 	# Initialization of a Q-value table
 	if args.initial_q_value=='optimistic':
@@ -132,7 +132,6 @@ def learn(env,exploration_rate):
 			a = next_a
 
 			if done:
-	
 				if policy_type == 'epsilon_greedy':
 					# exploration_rate is decayed expolentially
 					exploration_rate = exploration_rate * exploration_rate_decay
@@ -143,7 +142,7 @@ def learn(env,exploration_rate):
 				print("\rStep {} @ Episode {}/{} ({})".format(i_step, i_episode + 1, num_episodes, stats.episode_rewards[i_episode] ))
 				break
 
-	# Test the agent.
+	'''# Test the agent.
 	env = wrappers.Monitor(env, result_dir, force=True)
 	total_reward = 0
 
@@ -154,12 +153,12 @@ def learn(env,exploration_rate):
 		while not game_over:
 			action = np.argmax(Q[s, :])
 			s, reward, game_over, _ = env.step(action)
-			total_reward += reward
+			total_reward += reward'''
 	
 	return stats
 
 if __name__ == "__main__":
 	
-	stats=learn(env,exploration_rate)
+	stats=learn(env,exploration_rate,beta,beta_inc)
 
 	plot_episode_stats(stats, result_dir, smoothing_window=25)
