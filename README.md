@@ -31,11 +31,11 @@ has a 2 dimensional continues state space: (position, velocity) with one dimensi
 	<img src=https://github.com/sagittefrat/AI/blob/master/results-%3CTimeLimit%3CMountainCarEnv%3CMountainCar-v0%3E%3E%3E-q_learning-epsilon_greedy/openaigym.video.0.24474.video000064.gif width="375" title="Final agent 100 episodes"/>
 
 ### How to run:
-*Use SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
+*Use SARSA/Q-learning algorithm with epsilon-greedy/softmax policy*
 * **FrozenLake env**: FrozenLake_QL.py, FrozenLake_QL_options.py 
 * **MountainCar env**: MountainCar_QL.py, MountainCar_QL_options.py   
 
-*Use **Deep** SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
+*Use **Deep** SARSA/Q-learning algorithm with epsilon-greedy/softmax policy*
 * **FrozenLake env**: FrozenLake_DQN.py, FrozenLake_DQN_options.py 
 * **MountainCar env**: MountainCar_DQN.py, MountainCar_DQN_options.py 
 
