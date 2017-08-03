@@ -18,7 +18,7 @@
 When at state *s* it is important to take the right action *a* in order to get to the goal faster/ achieve more reward.
 * here you can see how choosing an action is changing the reward - random policy vs softmax policy:
 <img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-q_learning/reward.png" width="420" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-q_learning/reward.png" width="420" title="Final agent 300 episodes"/> 
-as we expected choosing, at the beggining explore more and towards the end exploit more is giving more reward than just exploring
+as we expected, at the beggining explore more and towards the end exploit more is giving more reward than just exploring
 
 
 
