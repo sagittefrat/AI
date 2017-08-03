@@ -60,5 +60,5 @@ run Algorithm - sarsa, Policy - softmax Learning Rate - 0.2 Number of episodes -
 
 	python MountainCar_QL.py -a sarsa -p softmax -lr 0.2 -n 300
 
-
+<img src=https://github.com/sagittefrat/AI/blob/master/RL.png/>
 
