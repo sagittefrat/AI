@@ -14,8 +14,9 @@
 ### Enviornments:
 #### FrozenLake https://gym.openai.com/envs/FrozenLake-v0
 has a 1 dimensional discrete state space with one dimensional discrete actions space: (F,S,H,G)
-* here you can see the reward of using two different methods on action taking, random vs epsilon-greedy:
-<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-q_learning/reward.png" width="375" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-q_learning-epsilon_greedy/reward.png" width="375" title="Final agent 300 episodes"/> 
+
+* here you can see the reward of using two different methods on action taking, random vs softmax:
+<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-q_learning/reward.png" width="375" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-q_learning-softmax/reward.png" width="375" title="Final agent 300 episodes"/> 
 
 
 
