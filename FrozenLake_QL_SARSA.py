@@ -38,7 +38,7 @@ num_episodes = args.nepisode
 max_step = args.maxstep
 result_dir = 'results/results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 # Start monitoring the simulation for OpenAI Gym
-#env = wrappers.Monitor(env, result_dir, force=True)
+env = wrappers.Monitor(env, result_dir, force=True)
 
 def learn(env,exploration_rate,beta, beta_inc):
 	
@@ -142,6 +142,8 @@ def learn(env,exploration_rate,beta, beta_inc):
 				print("\rStep {} @ Episode {}/{} ({})".format(i_step, i_episode + 1, num_episodes, stats.episode_rewards[i_episode] ))
 				break
 
+	#if not os.path.exists(result_dir):
+	#	os.makedirs(result_dir)
 	'''# Test the agent.
 	env = wrappers.Monitor(env, result_dir, force=True)
 	total_reward = 0
