@@ -92,7 +92,7 @@ def learn(env,exploration_rate):
             exploration_rate *= exploration_rate_decay
 
 
-        # Test the agent.
+        '''# Test the agent.
     
         total_reward = 0
 
@@ -107,7 +107,7 @@ def learn(env,exploration_rate):
                 total_reward += reward
 
       
-        print('Average Reward:', total_reward / 100)
+        print('Average Reward:', total_reward / 100)'''
 
     return stats
 
