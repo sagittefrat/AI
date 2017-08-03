@@ -33,15 +33,22 @@ has a 2 dimensional continues state space: (position, velocity) with one dimensi
 ### How to run:
 Use SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
 * FrozenLake env: FrozenLake_QL.py, FrozenLake_QL_options.py 
-* MountainCar env: MountainCar_QL.py, MountainCar_QL_options.py    
+* MountainCar env: MountainCar_QL.py, MountainCar_QL_options.py   
+
 Use Deep SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
 * FrozenLake env: FrozenLake_DQN.py, FrozenLake_DQN_options.py 
 * MountainCar env: MountainCar_DQN.py, MountainCar_DQN_options.py 
+
 you can play with the different parameters, as shown in each options file, for help run:
+
 	python MountainCar_QL.py -h
+	
 run with default parameters:
+
 	python MountainCar_QL.py
+	
 run Algorithm - sarsa, Policy - softmax Learning Rate - 0.2 Number of episodes - 300 :
+
 	python MountainCar_QL.py -a sarsa - p softmax -lr 0.2 -n 300
 
 
