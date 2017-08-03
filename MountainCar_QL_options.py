@@ -13,7 +13,7 @@ np.random.RandomState(42)
 
 # this defaults belongs to MountainCar_QL.py - No neural Network
 import argparse
-parser = argparse.ArgumentParser(description='Use SARSA/Q-learning algorithm with epsilon-greedy/softmax polciy.')
+parser = argparse.ArgumentParser(description='Use SARSA/Q-learning algorithm with epsilon-greedy/softmax policy.')
 parser.add_argument('-a', '--algorithm', default='q_learning', choices=['sarsa', 'q_learning'],
 					help="Type of learning algorithm. (Default: q_learning)")
 parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilon_greedy', 'softmax', 'random'],

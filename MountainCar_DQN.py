@@ -13,19 +13,23 @@ GAMMA = 0.9  # discount factor for target Q
 INITIAL_EPSILON = 0.5  # starting value of epsilon
 FINAL_EPSILON = 0.01  # final value of epsilon
 REPLAY_SIZE = 10000  # experience replay buffer size
-num_episodes=args.nepisode
 
+policy_type=args.policy
+algorithm_type=args.algorithm
+num_episodes=args.nepisode
+env_type=args.environment
 max_step=args.max_step
 optimizer=args.optimizer
 learning_rate = args.learning_rate
 result_dir=args.checkpoint_dir
 mode=args.mode
 batch_size=args.batch_size
-env = gym.make(args.environment)
+env = gym.make(env_type)
+result_dir = 'results-DQN-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 env = wrappers.Monitor(env, result_dir, force=True)
 
 # Random seed
-np.random.RandomState(42)
+np.random.RandomState(2)
 def replay(replay_buffer,state_input,sess,Q_value):
 
 	minibatch = random.sample(replay_buffer, batch_size)
@@ -38,7 +42,7 @@ def replay(replay_buffer,state_input,sess,Q_value):
 
 	Q_value_batch = sess.run(Q_value,feed_dict={state_input: next_state_batch})
 
-	for i in range(0, batch_size):
+	for i in range(batch_size):
 		done = minibatch[i][4]
 		if done:
 			y_batch.append(reward_batch[i])
@@ -50,14 +54,12 @@ def replay(replay_buffer,state_input,sess,Q_value):
 
 def dqn():
 
-	
 	replay_buffer = deque()
 	epsilon = INITIAL_EPSILON
 	state_dim = env.observation_space.shape[0]
 
 	action_dim = env.action_space.n
 	tf.reset_default_graph()
-	#model = args.model
 	state_input = tf.placeholder("float", [None, state_dim])
 	
 	Q_value = inference(state_input,state_dim,action_dim)
@@ -90,7 +92,7 @@ def dqn():
 	if not os.path.exists(result_dir):
 		os.makedirs(result_dir)
 	checkpoint_file = result_dir + "/checkpoint.ckpt"
-	init_op = tf.initialize_all_variables()
+	init_op = tf.global_variables_initializer()
 	saver = tf.train.Saver()
 	tf.summary.scalar('loss', loss)
 
@@ -155,7 +157,7 @@ def dqn():
 					if done:
 						break
 
-				# Validate for some episode		
+				'''# Validate for some episode		
 				if i_episode % args.episode_to_validate == 0:
 					print("Global step: {}, the loss: {}".format(i_step, loss_value))
 
@@ -172,7 +174,7 @@ def dqn():
 						if done:
 							break
 
-					print("Eposide: {}, total reward: {}".format(i_episode, total_reward))
+					print("Eposide: {}, total reward: {}".format(i_episode, total_reward))'''
 
 			# End of training process
 			saver.save(sess, checkpoint_file, global_step=i_step)

@@ -2,16 +2,20 @@
 from collections import deque,namedtuple
 import tensorflow as tf
 import matplotlib
-from matplotlib import pyplot as plt
-
-
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
 EpisodeStats = namedtuple("Stats",["episode_lengths", "episode_rewards"])
 
 import argparse
 parser = argparse.ArgumentParser(description='Use SARSA/Q-learning algorithm with epsilon-greedy/softmax polciy.')
+parser.add_argument('-a', '--algorithm', default='q_learning', choices=['sarsa', 'q_learning'],
+                    help="Type of learning algorithm. (Default: q_learning)")
 parser.add_argument('-e', '--environment', default='MountainCar-v0', choices=['MountainCar-v0', 'CartPole-v0','Acrobot-v0'],
 					help="Name of the environment provided in the OpenAI Gym. (Default: 'MountainCar-v0')")
+parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilon_greedy', 'softmax', 'random'],
+                    help="Type of policy. (Default: epsilon_greedy)")
 parser.add_argument('-lr', '--learning_rate', default='0.01', type=float,
 					help="Learning rate. (Default: 0.01)")
 parser.add_argument('-n', '--nepisode', default='200', type=int,
@@ -32,10 +36,9 @@ parser.add_argument('-bn', '--batch_normalization', default='False',
 				   help="Use batch normalization or not. (Default: False)")
 parser.add_argument('-mod', '--mode', default='train',choices=['inference','train','untrained'],
 					help="Opetion mode. (Default: train)")
-parser.add_argument('-render', '--render_game', default='True',
-				   help="Render the gym in window or not. (Default: True)")
+parser.add_argument('-render', '--render_game', default=False,
+				   help="Render the gym in window or not. (Default: False)")
 args = parser.parse_args() 
-
 
 
 # Define the model
@@ -85,7 +88,7 @@ def plot_episode_stats(stats, result_dir, smoothing_window=10):
 	plt.xlabel("Episode")
 	plt.ylabel("Episode Length")
 	plt.title("Episode Length over Time")
-	fig1.savefig(''+result_dir+'./episode.png')
+	fig1.savefig(''+result_dir+'/episode.png')
 
 	# Plot the episode reward over time
 	fig2 = plt.figure(figsize=(10,5))
@@ -94,7 +97,7 @@ def plot_episode_stats(stats, result_dir, smoothing_window=10):
 	plt.xlabel("Episode")
 	plt.ylabel("Episode Reward (Smoothed)")
 	plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
-	fig2.savefig(''+result_dir+'./reward.png')
+	fig2.savefig(''+result_dir+'/reward.png')
    
 	# Plot time steps and episode number
 	fig3 = plt.figure(figsize=(10,5))
@@ -102,7 +105,7 @@ def plot_episode_stats(stats, result_dir, smoothing_window=10):
 	plt.xlabel("Time Steps")
 	plt.ylabel("Episode")
 	plt.title("Episode per time step")
-	fig3.savefig(''+result_dir+'./steps_episode.png')
+	fig3.savefig(''+result_dir+'/steps_episode.png')
 
 
 

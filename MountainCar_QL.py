@@ -7,9 +7,9 @@ from MountainCar_QL_options import *
 
 
 matplotlib.style.use('ggplot')
-
+env_type=args.environment
 # initializing the problem:
-env = gym.envs.make(args.environment)
+env = gym.envs.make(env_type)
 algorithm_type = args.algorithm
 policy_type = args.policy
 max_step=args.max_step
@@ -19,7 +19,7 @@ epsilon_decay=args.exploration_rate_decay
 num_episodes=args.nepisode
 beta=args.beta
 
-result_dir = 'results-{0}-{1}-{2}'.format(env, algorithm_type, policy_type)
+result_dir = 'results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 env = wrappers.Monitor(env, result_dir, force=True)
 
 (featurizer, scaler)=preprocess(env)
