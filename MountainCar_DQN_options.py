@@ -17,7 +17,9 @@ parser.add_argument('-e', '--environment', default='MountainCar-v0', choices=['M
 parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilon_greedy', 'softmax', 'random'],
                     help="Type of policy. (Default: epsilon_greedy)")
 parser.add_argument('-lr', '--learning_rate', default='0.01', type=float,
-					help="Learning rate. (Default: 0.01)")
+					help="Learning rate. (Default: 0.001)")
+parser.add_argument('-ga', '--discount_rate', default='0.9', type=float,
+                    help="Discount rate. (Default: 0.9)")
 parser.add_argument('-n', '--nepisode', default='200', type=int,
 					help="Number of episode. (Default: 200)")
 parser.add_argument('-ms', '--max_step', default='500', type=int,
@@ -38,6 +40,10 @@ parser.add_argument('-mod', '--mode', default='train',choices=['inference','trai
 					help="Opetion mode. (Default: train)")
 parser.add_argument('-render', '--render_game', default=False,
 				   help="Render the gym in window or not. (Default: False)")
+arser.add_argument('-ep', '--exploration_rate', default='0.5', type=float,
+                    help="Fraction of random exploration in the epsilon greedy. (Default: 0.5)")
+parser.add_argument('-ed', '--exploration_rate_decay', default='0.995', type=float,
+                    help="Decay rate of exploration_rate in the epsilon greedy. (Default: 0.995)")
 args = parser.parse_args() 
 
 

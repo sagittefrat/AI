@@ -9,9 +9,8 @@ from gym import wrappers
 import time
 from MountainCar_DQN_options import *
 
-GAMMA = 0.9  # discount factor for target Q
-INITIAL_EPSILON = 0.5  # starting value of epsilon
-FINAL_EPSILON = 0.01  # final value of epsilon
+
+#FINAL_EPSILON = 0.01  # final value of epsilon
 REPLAY_SIZE = 10000  # experience replay buffer size
 
 policy_type=args.policy
@@ -47,7 +46,7 @@ def replay(replay_buffer,state_input,sess,Q_value):
 		if done:
 			y_batch.append(reward_batch[i])
 		else:
-			y_batch.append(reward_batch[i] + GAMMA * np.max(Q_value_batch[
+			y_batch.append(reward_batch[i] + discount_rate * np.max(Q_value_batch[
 					i]))
 
 	return (y_batch, action_batch, state_batch)
@@ -55,7 +54,7 @@ def replay(replay_buffer,state_input,sess,Q_value):
 def dqn():
 
 	replay_buffer = deque()
-	epsilon = INITIAL_EPSILON
+	epsilon = args.exploration_rate
 	state_dim = env.observation_space.shape[0]
 
 	action_dim = env.action_space.n
@@ -121,7 +120,7 @@ def dqn():
 				for i_step in xrange(max_step):
 
 					# Get action from exploration and exploitation
-					if random.random() <= epsilon:
+					if random.random() <= exploration_rate:
 						action = random.randint(0, action_dim - 1)
 					else:
 						Q_value_value = sess.run(Q_value, feed_dict={state_input: [state]})[0]
