@@ -24,7 +24,7 @@ result_dir=args.checkpoint_dir
 mode=args.mode
 batch_size=args.batch_size
 env = gym.make(env_type)
-result_dir = 'results-DQN-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
+result_dir = 'results/results-DQN-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 env = wrappers.Monitor(env, result_dir, force=True)
 
 # Random seed

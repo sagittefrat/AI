@@ -30,7 +30,7 @@ q_std = args.qstd
 # Experimental setup
 num_episodes = args.nepisode
 max_step = args.maxstep
-result_dir = 'results-DQN-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
+result_dir = 'results/results-DQN-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 env = wrappers.Monitor(env, result_dir, force=True)
 
 EpisodeStats = namedtuple("Stats",["episode_lengths", "episode_rewards"])

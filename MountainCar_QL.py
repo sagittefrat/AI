@@ -19,7 +19,7 @@ epsilon_decay=args.exploration_rate_decay
 num_episodes=args.nepisode
 beta=args.beta
 
-result_dir = 'results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
+result_dir = 'results/results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 env = wrappers.Monitor(env, result_dir, force=True)
 
 (featurizer, scaler)=preprocess(env)
