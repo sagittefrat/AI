@@ -22,7 +22,7 @@ has a 2 dimensional continues state space: (position, velocity) with one dimensi
 
 * Sarsa with Softmax episode 125 learning rate-0.5 vs learning rate-0.1:
 
-	<img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.2-video000125.gif" width="375" title="Initial agent"/> <img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.1-video000125.gif" width="375" title="Final agent 300 episodes"/> 
+	<img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.5-video000125.gif" width="375" title="Initial agent"/> <img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.1-video000125.gif" width="375" title="Final agent 300 episodes"/> 
 	
 	
 * Epsilon-greedy with Q-learn episode 8 vs Q-learn episode 64 vs Sarsa episode 64 (learning rate-0.1):
