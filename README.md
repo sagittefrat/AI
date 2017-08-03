@@ -35,7 +35,7 @@ Use SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
 * **FrozenLake env**: FrozenLake_QL.py, FrozenLake_QL_options.py 
 * **MountainCar env**: MountainCar_QL.py, MountainCar_QL_options.py   
 
-Use Deep SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
+Use *Deep* SARSA/Q-learning algorithm with epsilon-greedy/softmax policy
 * **FrozenLake env**: FrozenLake_DQN.py, FrozenLake_DQN_options.py 
 * **MountainCar env**: MountainCar_DQN.py, MountainCar_DQN_options.py 
 
