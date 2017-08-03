@@ -142,20 +142,17 @@ def learn(env,exploration_rate,beta, beta_inc):
 				print("\rStep {} @ Episode {}/{} ({})".format(i_step, i_episode + 1, num_episodes, stats.episode_rewards[i_episode] ))
 				break
 
-	#if not os.path.exists(result_dir):
-	#	os.makedirs(result_dir)
-	'''# Test the agent.
-	env = wrappers.Monitor(env, result_dir, force=True)
 	total_reward = 0
 
 	for _ in range(100):
+		env.render()
 		s = env.reset()
 		game_over = False
 
 		while not game_over:
 			action = np.argmax(Q[s, :])
 			s, reward, game_over, _ = env.step(action)
-			total_reward += reward'''
+			total_reward += reward
 	
 	return stats
 
