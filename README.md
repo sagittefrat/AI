@@ -15,12 +15,12 @@
 #### FrozenLake https://gym.openai.com/envs/FrozenLake-v0
 has a 1 dimensional discrete state space with one dimensional discrete actions space: (F,S,H,G)
 * here you can see the reward of using two different methods on action taking, random vs epsilon-greedy:
-<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-sarsa-random/reward.png" width="375" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-q_learning-epsilon_greedy/reward.png" width="375" title="Final agent 300 episodes"/> 
+<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-q_learning-random/reward.png" width="375" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-q_learning-epsilon_greedy/reward.png" width="375" title="Final agent 300 episodes"/> 
 
 
 
 #### MountainCar https://gym.openai.com/envs/MountainCar-v0
-has a 2 dimensional continues state space: (position, velocity) with one dimensional discrete actions space: (left, neutral, right)
+has a 2 dimensional continous state space: (position, velocity) with one dimensional discrete actions space: (left, neutral, right)
 
 * Sarsa with Softmax episode 125 learning rate-0.5 vs learning rate-0.1:
 
