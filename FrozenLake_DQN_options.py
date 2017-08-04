@@ -1,33 +1,31 @@
 #!/usr/bin/env python
 
-# python basic_rl_sarsa_QL.py -a sarsa -p random -lr 0.8 -ga 0.95 -n 2000 -initq zero : ~40% ~600ep
-#62.45% episode ~300 ~8000ep
-# python basic_rl_sarsa_QL.py -a q_learning -p random -lr 0.8 -ga 0.95 -n 2000 -initq zero : 50% ~300ep @same results as sarsa
-# deep_q_learning ~100 
 from __future__ import division
 import random
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
 from collections import namedtuple
 import gym
+from gym import wrappers
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+
 
 # Random seed
 #np.random.RandomState(42)
 
 
 import argparse
-parser = argparse.ArgumentParser(description='Use SARSA/Q-learning algorithm with epsilon-greedy/softmax polciy.')
+parser = argparse.ArgumentParser(description='Use SARSA/Q-learning algorithm with epsilon-greedy/softmax policy.')
 parser.add_argument('-a', '--algorithm', default='q_learning', choices=['sarsa', 'q_learning'],
                     help="Type of learning algorithm. (Default: q_learning)")
 parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilon_greedy', 'softmax', 'random'],
                     help="Type of policy. (Default: epsilon_greedy)")
 parser.add_argument('-e', '--environment', default='FrozenLake-v0', choices=['Taxi-v2', 'Roulette-v0','FrozenLake-v0'],
                     help="Name of the environment provided in the OpenAI Gym. (Default: Taxi-v2)")
-parser.add_argument('-n', '--nepisode', default='5000', type=int,
-                    help="Number of episode. (Default: 5000)")
+parser.add_argument('-n', '--nepisode', default='6000', type=int,
+                    help="Number of episode. (Default: 6000)")
 parser.add_argument('-lr', '--learning_rate', default='0.1', type=float,
                     help="Learning rate. (Default: 0.1)")
 parser.add_argument('-be', '--beta', default='0.0', type=float,
@@ -54,9 +52,49 @@ parser.add_argument('-render', '--render_game', default=False,
 
 args = parser.parse_args()
 
-np.set_printoptions(precision=3, suppress=True)
+
+env_type = args.environment
+algorithm_type = args.algorithm
+policy_type = args.policy
+
+# Random seed
+np.random.RandomState(1)
+
+# Selection of the problem
+env = gym.envs.make(env_type)
+# Meta parameters for the RL agent
+learning_rate = args.learning_rate
+beta = args.beta
+beta_inc = args.betainc
+discount_rate = args.discount_rate
+exploration_rate = args.exploration_rate
+exploration_rate_decay = args.exploration_rate_decay
+q_mean = args.qmean
+q_std = args.qstd
+
+# Experimental setup
+num_episodes = args.nepisode
+max_step = args.maxstep
+result_dir = 'results/results-DQN-{0}-{1}-{2}-nepisode{3}-lr{4}'.format(env_type, policy_type,algorithm_type,num_episodes,learning_rate)
 
 EpisodeStats = namedtuple("Stats",["episode_lengths", "episode_rewards"])
+
+class Network():
+    def __init__(self):
+        # Agent can be in one of 16 states.
+        self.states = np.identity(16)
+
+        # defining the neural network:
+        self.x = tf.placeholder(shape=[1, 16], dtype=tf.float32)
+        self.W = tf.Variable(tf.random_uniform([16, 4], 0, 0.1))
+
+        # Estimated Q values for each action.
+        self.y = tf.matmul(self.x, self.W)
+
+        # Observed Q values (well only one action is observed, the rest remain equal to 'y').
+        self.y_ = tf.placeholder(shape=[1, 4], dtype=tf.float32)
+        self.loss = tf.reduce_sum(tf.square(self.y_ - self.y))
+        self.train_step = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(self.loss)
 
 def softmax(Q, beta=1.0):
     assert beta >= 0.0
