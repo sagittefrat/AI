@@ -51,7 +51,7 @@ def replay(replay_buffer,state_input,sess,Q_value):
 
 	return (y_batch, action_batch, state_batch)
 
-def dqn():
+def learn():
 
 	replay_buffer = deque()
 	epsilon = args.exploration_rate
@@ -232,5 +232,5 @@ def dqn():
 
 if __name__ == "__main__":
 
-	stats=dqn()
+	stats=learn()
 	plot_episode_stats(stats, result_dir, smoothing_window=25)

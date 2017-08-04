@@ -10,9 +10,13 @@ import tensorflow as tf
 import tensorflow.contrib.slim as slim
 from collections import namedtuple
 import gym
+from gym import wrappers
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
+
+import os
+
 
 # Random seed
 #np.random.RandomState(42)
@@ -47,7 +51,7 @@ parser.add_argument('-qm', '--qmean', default='0.0', type=float,
 parser.add_argument('-qs', '--qstd', default='1.0', type=float,
                     help="Standard deviation of the Gaussian used for initializing Q table. (Default: 1.0)")
 parser.add_argument('-initq', '--initial_q_value', default='optimistic',choices=['optimistic','zero'],
-                    help="initializing Q table values. (Default: optimistic)")
+                    help="initializing Q table values, if we are optimistic we will cosider Gaussian distribution. (Default: optimistic)")
 parser.add_argument('-resdir', '--results_dir', default= 'None')
 parser.add_argument('-render', '--render_game', default=False,
                    help="Render the gym in window or not. (Default: False)")
@@ -57,6 +61,36 @@ args = parser.parse_args()
 np.set_printoptions(precision=3, suppress=True)
 
 EpisodeStats = namedtuple("Stats",["episode_lengths", "episode_rewards"])
+
+
+env_type = args.environment
+algorithm_type = args.algorithm
+policy_type = args.policy
+
+# Random seed
+np.random.RandomState(42)
+
+# Selection of the problem
+env = gym.envs.make(env_type)
+
+# Constraints imposed by the environment
+n_a = env.action_space.n
+n_s = env.observation_space.n
+
+# Meta parameters for the RL agent
+learning_rate = args.learning_rate
+beta = args.beta
+beta_inc = args.betainc
+discount_rate = args.discount_rate
+exploration_rate = args.exploration_rate
+exploration_rate_decay = args.exploration_rate_decay
+q_mean = args.qmean
+q_std = args.qstd
+
+# Experimental setup
+num_episodes = args.nepisode
+max_step = args.maxstep
+result_dir = 'results/results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
 
 def softmax(Q, beta=1.0):
     assert beta >= 0.0
