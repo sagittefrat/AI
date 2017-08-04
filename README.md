@@ -1,4 +1,4 @@
-<img src="https://github.com/sagittefrat/AI/blob/master/AI.jpg" width="180" align="right" />
+<img src="https://github.com/sagittefrat/AI/blob/master/AI.jpg" width="110" align="right" />
 
 # AI
 
