@@ -10,9 +10,11 @@ In this repository you can find different codes visuallizes how different learni
    <img src="https://github.com/sagittefrat/AI/blob/master/update_q.png" width="220" />
 
 ### Actions Choosing:
-	Epsilon-Greedy
-	Softmax (Boltzman Temperture)	<"P(a) = e^beta(Q_s-max_Q)/" width="420" />
-	Random
+   Epsilon-Greedy
+   
+   Softmax (Boltzman Temperture) <img src=https://github.com/sagittefrat/AI/blob/master/softmax.png />	
+   
+   Random
 ### RL parameters:
 	exploration rate (epsilon), exploration rate decay
 	learning rate (alpha), learning rate decay
