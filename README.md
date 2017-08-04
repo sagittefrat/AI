@@ -1,4 +1,4 @@
-<img src="https://github.com/sagittefrat/AI/blob/master/AI.jpg" width="110" align="right" />
+<img src="https://github.com/sagittefrat/AI/blob/master/images/AI.jpg" width="110" align="right" />
 
 # AI
 
@@ -8,11 +8,11 @@ remember: we don't want to tell the agent what are the rule of the game instead 
 
 ### Algorithms:
     
-   <img src="https://github.com/sagittefrat/AI/blob/master/QL.png" />
+   <img src="https://github.com/sagittefrat/AI/blob/master/images/QL.png" />
 
 ### Actions Choosing:
    
-  <img src=https://github.com/sagittefrat/AI/blob/master/policy.png />	
+  <img src=https://github.com/sagittefrat/AI/blob/master/images/policy.png />	
  
 ### RL parameters:
 	exploration rate (epsilon), exploration rate decay
