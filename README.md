@@ -4,10 +4,8 @@
 In this repository you can find different codes visuallizes how different learning algorithms and parameters can change the solution to the RL problem. 
 
 ### Algorithms:
-   Q-Learning  	Off-policy 	<img src="https://github.com/sagittefrat/AI/blob/master/delta_ql.png" />
-   
-   Sarsa	On-policy	<img src="https://github.com/sagittefrat/AI/blob/master/delta_sarsa.png" />  
-   <img src="https://github.com/sagittefrat/AI/blob/master/update_q.png" width="220" />
+    
+   <img src="https://github.com/sagittefrat/AI/blob/master/QL.png" />
 
 ### Actions Choosing:
    Epsilon-Greedy
