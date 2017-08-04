@@ -44,7 +44,7 @@ def learn(env,exploration_rate):
                 if done:
                     break
 
-            print('episode: {:d}  reward: {:g}  leatning rate: {:g}'.format(i_episode + 1, reward, exploration_rate))
+            print('episode: {:d}  reward: {:g}  learning rate: {:g}'.format(i_episode + 1, reward, exploration_rate))
 
             exploration_rate *= exploration_rate_decay
 
