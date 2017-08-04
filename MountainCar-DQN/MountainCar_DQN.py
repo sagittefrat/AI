@@ -91,7 +91,7 @@ class Mcar:
 		return stats
 
 if __name__ == "__main__":
-import tensorflow as tf
+
 	with tf.device('/cpu:0'):
 		cp = Mcar(num_episodes, result_dir,env,result_dir, max_step)
 		stats=cp.learn()
