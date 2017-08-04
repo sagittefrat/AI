@@ -1,15 +1,21 @@
 # AI
 
 ## Reinforcemnt Learning
+In this repository you can find different codes visuallizes how different learning algorithms and parameters can change the solution to the RL problem. 
 
 ### Algorithms:
-	Q-Learning  	Off-policy
-	Sarsa		On-policy
+	Q-Learning  	Off-policy 	<"" width="420"/>
+	Sarsa		On-policy	<"Q(s, a) = reward(s) + alpha * Q(s', a')" width="420" />
 ### Actions Choosing:
 	Epsilon-Greedy
-	Softmax (Boltzman Temp)
-	Greedy
+	Softmax (Boltzman Temperture)	<"P(a) = e^beta(Q_s-max_Q)/" width="420" />
 	Random
+### RL parameters:
+	exploration rate (epsilon), exploration rate decay
+	learning rate (alpha), learning rate decay
+	discount factor (gamma)
+	inverse temperature (beta), inverse temperature increase
+	
 
 ### Enviornments:
 #### FrozenLake https://gym.openai.com/envs/FrozenLake-v0
