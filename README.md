@@ -27,8 +27,8 @@ remember: we don't want to tell the agent what are the rule of the game instead 
 the start from S and recives reward only when reaching to the goal-G
 
 When at state *s* it is important to take the right action *a* in order to get to the goal faster/ achieve more reward.
-* here you can see how choosing an action is changing the reward - random policy vs softmax policy:
-<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-q_learning/reward.png" width="420" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-q_learning/reward.png" width="420" title="Final agent 300 episodes"/> 
+* here you can see how choosing an action is changing the reward - softmax policy vs random policy:
+<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Final agent 300 episodes"/> 
 as we expected, at the beggining explore more and towards the end exploit more is giving more reward than just exploring.
 also notice, this results came from initializing the Q-table to zeros, try to initialize to the mean of Gaussian and see the much worse results..
 
