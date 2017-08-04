@@ -1,3 +1,4 @@
+<img src="https://github.com/sagittefrat/AI/blob/master/AI.png" align="right" />
 # AI
 
 ## Reinforcemnt Learning
