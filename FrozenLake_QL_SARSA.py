@@ -10,10 +10,7 @@ env = wrappers.Monitor(env, result_dir, force=True)
 def learn(env,exploration_rate,beta, beta_inc):
 	
 	# Initialization of a Q-value table
-	if args.initial_q_value=='optimistic':
-		Q = q_mean + q_std * np.random.randn(n_s, n_a)
-	else: # initialization to zeroes:
-		Q = np.zeros([n_s, n_a])
+	Q=initilize_q()
 	
 	# Keeps track of useful statistics
 	stats = EpisodeStats(
@@ -26,17 +23,13 @@ def learn(env,exploration_rate,beta, beta_inc):
 		s = env.reset()
 
 		# Select the first action in this episode
-		if policy_type == 'softmax':
-			a = select_a_with_softmax(s, Q, beta=beta)
-		elif policy_type == 'epsilon_greedy':
-			a = select_a_with_epsilon_greedy(s, Q, epsilon=exploration_rate)
-		elif policy_type == 'random':
-			a = np.argmax(Q[s,:] + np.random.randn(1,env.action_space.n)*(1./(i_episode+1)))
-		else:
-			raise ValueError("Invalid policy_type: {}".format(policy_type))
+		a=select_a(policy_type, s, Q, i_episode, n_a, beta=beta, epsilon=exploration_rate)
+		
 
 		for i_step in xrange(max_step):
-
+			#print 'Q\n',Q
+			
+			
 			if args.render_game:
 				env.render()
 
@@ -48,15 +41,9 @@ def learn(env,exploration_rate,beta, beta_inc):
 			stats.episode_lengths[i_episode] = i_step
 
 			# Select an action
-			if policy_type == 'softmax':
-				next_a = select_a_with_softmax(next_s, Q, beta=beta)
-			elif policy_type == 'epsilon_greedy':
-				next_a = select_a_with_epsilon_greedy(next_s, Q, epsilon=exploration_rate)
-			elif policy_type == 'random':
-				next_a = np.argmax(Q[next_s,:] + np.random.randn(1,env.action_space.n)*(1./(i_episode+1)))
-			else:
-				raise ValueError("Invalid policy_type: {}".format(policy_type))            
-
+			next_a=select_a(policy_type, next_s, Q, i_episode, n_a, beta=beta, epsilon=exploration_rate)            
+			#print 's,a,next_s,next_a', s,a,next_s,next_a
+			
 			# Calculation of TD error
 			if algorithm_type == 'sarsa':
 				delta = reward + discount_rate * Q[next_s, next_a] - Q[s, a]
@@ -72,27 +59,15 @@ def learn(env,exploration_rate,beta, beta_inc):
 			a = next_a
 
 			if done:
-				if policy_type == 'epsilon_greedy':
-					# exploration_rate is decayed expolentially
-					exploration_rate = exploration_rate * exploration_rate_decay
-				elif policy_type == 'softmax':
-					# beta is increased linearly
-					beta = beta + beta_inc
-
+				# you can speed up the processif giving negative reward when done and not achieving goal but this is solution to this specific problem
+				#print 'done'
+				
+				(beta,exploration_rate)=update_policy_parameters(policy_type,exploration_rate=exploration_rate,exploration_rate_decay=exploration_rate_decay,beta=beta,beta_inc=beta_inc)
+				#print exploration_rate
+				#raw_input()
 				print("\rStep {} @ Episode {}/{} ({})".format(i_step, i_episode + 1, num_episodes, stats.episode_rewards[i_episode] ))
 				break
 
-	'''total_reward = 0
-
-	for _ in range(100):
-		env.render()
-		s = env.reset()
-		game_over = False
-
-		while not game_over:
-			action = np.argmax(Q[s, :])
-			s, reward, game_over, _ = env.step(action)
-			total_reward += reward'''
 	
 	return stats
 

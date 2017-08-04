@@ -20,7 +20,7 @@ parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilo
 					help="Type of policy. (Default: epsilon_greedy)")
 parser.add_argument('-e', '--environment', default='MountainCar-v0', choices=['MountainCar-v0', 'CartPole-v0','Acrobot-v0'],
 					help="Name of the environment provided in the OpenAI Gym. (Default: 'MountainCar-v0')")
-parser.add_argument('-n', '--nepisode', default='300', type=int,
+parser.add_argument('-n', '--nepisode', default='1000', type=int,
 					help="Number of episode. (Default: 100)")
 parser.add_argument('-lr', '--learning_rate', default='0.1', type=float,
 					help="Learning rate. (Default: 0.1)")
@@ -37,6 +37,8 @@ parser.add_argument('-ed', '--exploration_rate_decay', default='1.0', type=float
 parser.add_argument('-ms', '--max_step', default='1000', type=int,
 				   help="Maximum step allowed in episode. (Default: 1000)")
 args = parser.parse_args() 
+
+result_dir = 'results/results-QL-{0}-{1}-{2}-nepisode{3}-lr{4}-{5}'.format(env_type, policy_type,algorithm_type,num_episodes,learning_rate,args.initial_q_value)
 
 def preprocess(env):
 	# Feature Preprocessing: Normalize to zero mean and unit variance

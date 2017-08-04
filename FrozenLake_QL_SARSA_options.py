@@ -30,8 +30,8 @@ parser.add_argument('-p', '--policy', default='epsilon_greedy', choices=['epsilo
                     help="Type of policy. (Default: epsilon_greedy)")
 parser.add_argument('-e', '--environment', default='FrozenLake-v0', choices=['Taxi-v2', 'Roulette-v0','FrozenLake-v0'],
                     help="Name of the environment provided in the OpenAI Gym. (Default: Taxi-v2)")
-parser.add_argument('-n', '--nepisode', default='5000', type=int,
-                    help="Number of episode. (Default: 20000)")
+parser.add_argument('-n', '--nepisode', default='6000', type=int,
+                    help="Number of episode. (Default: 300)")
 parser.add_argument('-lr', '--learning_rate', default='0.1', type=float,
                     help="Learning rate. (Default: 0.1)")
 parser.add_argument('-be', '--beta', default='0.0', type=float,
@@ -44,13 +44,13 @@ parser.add_argument('-ep', '--exploration_rate', default='0.8', type=float,
                     help="Fraction of random exploration in the epsilon greedy. (Default: 0.8)")
 parser.add_argument('-ed', '--exploration_rate_decay', default='0.995', type=float,
                     help="Decay rate of exploration_rate in the epsilon greedy. (Default: 0.995)")
-parser.add_argument('-ms', '--maxstep', default='200', type=int,
-                    help="Maximum step allowed in episode. (Default: 200)")
+parser.add_argument('-ms', '--maxstep', default='2000', type=int,
+                    help="Maximum step allowed in episode. (Default: 2000)")
 parser.add_argument('-qm', '--qmean', default='0.0', type=float,
                     help="Mean of the Gaussian used for initializing Q table. (Default: 0.0)")
 parser.add_argument('-qs', '--qstd', default='1.0', type=float,
                     help="Standard deviation of the Gaussian used for initializing Q table. (Default: 1.0)")
-parser.add_argument('-initq', '--initial_q_value', default='optimistic',choices=['optimistic','zero'],
+parser.add_argument('-initq', '--initial_q_value', default='zero',choices=['optimistic','zero'],
                     help="initializing Q table values, if we are optimistic we will cosider Gaussian distribution. (Default: optimistic)")
 parser.add_argument('-resdir', '--results_dir', default= 'None')
 parser.add_argument('-render', '--render_game', default=False,
@@ -90,7 +90,34 @@ q_std = args.qstd
 # Experimental setup
 num_episodes = args.nepisode
 max_step = args.maxstep
-result_dir = 'results/results-QL-{0}-{1}-{2}'.format(env_type, policy_type,algorithm_type)
+result_dir = 'results/results-QL-{0}-{1}-{2}-nepisode{3}-lr{4}-{5}'.format(env_type, policy_type,algorithm_type,num_episodes,learning_rate,args.initial_q_value)
+
+def update_policy_parameters(policy_type,exploration_rate=exploration_rate,exploration_rate_decay=exploration_rate_decay,beta=beta,beta_inc=beta_inc):
+    if policy_type == 'epsilon_greedy':
+        # exploration_rate is decayed expolentially
+        exploration_rate  *= exploration_rate_decay
+    elif policy_type == 'softmax':
+        # beta is increased linearly
+        beta = beta + beta_inc
+    return (beta,exploration_rate)
+
+def initilize_q():
+    if args.initial_q_value=='optimistic':
+        Q = q_mean + q_std * np.random.randn(n_s, n_a)
+    else: # initialization to zeroes:
+        Q = np.zeros([n_s, n_a])
+    return Q
+
+def select_a(policy_type, s, Q, i_episode, n_a, beta=beta, epsilon=exploration_rate):
+    if policy_type == 'softmax':
+        return select_a_with_softmax(s, Q, beta=beta)
+    elif policy_type == 'epsilon_greedy':
+        return select_a_with_epsilon_greedy(s, Q, epsilon=exploration_rate)
+    elif policy_type == 'random':
+        return np.argmax(Q[s,:] + np.random.randn(1,n_a)*(1./(i_episode+1)))
+    else:
+        raise ValueError("Invalid policy_type: {}".format(policy_type))
+
 
 def softmax(Q, beta=1.0):
     assert beta >= 0.0
@@ -108,6 +135,34 @@ def select_a_with_epsilon_greedy(s, Q, epsilon=0.1):
     if np.random.rand() < epsilon:
         a = np.random.randint(Q.shape[1])
     return a
+
+def plot_episode_stats(stats, result_dir, smoothing_window=10):
+    # Plot the episode length over time
+    fig1 = plt.figure(figsize=(10,5))
+    plt.plot(stats.episode_lengths)
+    plt.xlabel("Episode")
+    plt.ylabel("Episode Length")
+    plt.title("Episode Length over Time")
+    fig1.savefig(''+result_dir+'/episode.png')
+
+    # Plot the episode reward over time
+    fig2 = plt.figure(figsize=(10,5))
+    rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
+    plt.plot(rewards_smoothed)
+    plt.xlabel("Episode")
+    plt.ylabel("Episode Reward (Smoothed)")
+    plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
+    fig2.savefig(''+result_dir+'/reward.png')
+   
+    # Plot time steps and episode number
+    fig3 = plt.figure(figsize=(10,5))
+    plt.plot(np.cumsum(stats.episode_lengths), np.arange(len(stats.episode_lengths)))
+    plt.xlabel("Time Steps")
+    plt.ylabel("Episode")
+    plt.title("Episode per time step")
+    fig3.savefig(''+result_dir+'/steps_episode.png')
+
+'''
 
 def plot_value_function(V, title="Value Function"):
     """
@@ -141,34 +196,6 @@ def plot_value_function(V, title="Value Function"):
 
     plot_surface(X, Y, Z_noace, "{} (No Usable Ace)".format(title))
     plot_surface(X, Y, Z_ace, "{} (Usable Ace)".format(title))
-
-
-
-def plot_episode_stats(stats, result_dir, smoothing_window=10):
-    # Plot the episode length over time
-    fig1 = plt.figure(figsize=(10,5))
-    plt.plot(stats.episode_lengths)
-    plt.xlabel("Episode")
-    plt.ylabel("Episode Length")
-    plt.title("Episode Length over Time")
-    fig1.savefig(''+result_dir+'/episode.png')
-
-    # Plot the episode reward over time
-    fig2 = plt.figure(figsize=(10,5))
-    rewards_smoothed = pd.Series(stats.episode_rewards).rolling(smoothing_window, min_periods=smoothing_window).mean()
-    plt.plot(rewards_smoothed)
-    plt.xlabel("Episode")
-    plt.ylabel("Episode Reward (Smoothed)")
-    plt.title("Episode Reward over Time (Smoothed over window size {})".format(smoothing_window))
-    fig2.savefig(''+result_dir+'/reward.png')
-   
-    # Plot time steps and episode number
-    fig3 = plt.figure(figsize=(10,5))
-    plt.plot(np.cumsum(stats.episode_lengths), np.arange(len(stats.episode_lengths)))
-    plt.xlabel("Time Steps")
-    plt.ylabel("Episode")
-    plt.title("Episode per time step")
-    fig3.savefig(''+result_dir+'/steps_episode.png')
 
 
 def plot_score_board(history, window_size, policy_type, Q, n_s, n_a, result_dir ):
@@ -213,4 +240,4 @@ def plot_score_board(history, window_size, policy_type, Q, n_s, n_a, result_dir 
           print greedy_action
 
 def running_average(x, window_size, mode='valid'):
-     return np.convolve(x, np.ones(window_size)/window_size, mode=mode)
+    return np.convolve(x, np.ones(window_size)/window_size, mode=mode)'''

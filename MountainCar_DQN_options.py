@@ -20,7 +20,7 @@ parser.add_argument('-lr', '--learning_rate', default='0.01', type=float,
 					help="Learning rate. (Default: 0.001)")
 parser.add_argument('-ga', '--discount_rate', default='0.9', type=float,
                     help="Discount rate. (Default: 0.9)")
-parser.add_argument('-n', '--nepisode', default='200', type=int,
+parser.add_argument('-n', '--nepisode', default='1000', type=int,
 					help="Number of episode. (Default: 200)")
 parser.add_argument('-ms', '--max_step', default='500', type=int,
 				   help="Maximum step allowed in episode. (Default: 500)")
