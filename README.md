@@ -1,18 +1,19 @@
-<img src="https://github.com/sagittefrat/AI/blob/master/AI.jpg" width="110" align="right" />
+<img src="https://github.com/sagittefrat/AI/blob/master/images/AI.jpg" width="110" align="right" />
 
 # AI
 
 ## Reinforcemnt Learning
-In this repository you can find different codes visuallizes how different learning algorithms and parameters can change the solution to the RL problem. 
-remember: we don't want to tell the agent what are the rule of the game instead we'll let him explore, if he do get's to the goal than a reward is given and the agent will want to keep taking good steps to recieve more reward
+In this repository you can find different codes visuallizes how different learning algorithms and parameters can change the solution to the RL problem.
+
+We don't want to tell the agent what are the rules, instead we'll let him explore, if he get's to the goal than a reward is given and the agent will want to keep taking good steps to recieve more reward.
 
 ### Algorithms:
     
-   <img src="https://github.com/sagittefrat/AI/blob/master/QL.png" />
+   <img src="https://github.com/sagittefrat/AI/blob/master/images/QL.png" />
 
 ### Actions Choosing:
    
-  <img src=https://github.com/sagittefrat/AI/blob/master/policy.png />	
+  <img src=https://github.com/sagittefrat/AI/blob/master/images/policy.png />	
  
 ### RL parameters:
 	exploration rate (epsilon), exploration rate decay
@@ -24,10 +25,11 @@ remember: we don't want to tell the agent what are the rule of the game instead 
 ### Enviornments:
 #### FrozenLake https://gym.openai.com/envs/FrozenLake-v0
 1 dimensional discrete state space with one dimensional discrete actions space: (F,S,H,G)
-the start from S and recives reward only when reaching to the goal-G
+
+the agent start from S and recives reward only when reaching to the goal-G
 
 When at state *s* it is important to take the right action *a* in order to get to the goal faster/ achieve more reward.
-* here you can see how choosing an action is changing the reward - softmax policy vs random policy:
+* here you can see how choosing the right action can change the reward dramaticly - softmax policy vs random policy:
 <img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Final agent 300 episodes"/> 
 as we expected, at the beggining explore more and towards the end exploit more is giving more reward than just exploring.
 also notice, this results came from initializing the Q-table to zeros, try to initialize to the mean of Gaussian and see the much worse results..
@@ -72,5 +74,5 @@ run Algorithm - sarsa, Policy - softmax Learning Rate - 0.2 Number of episodes -
 
 	python MountainCar_QL.py -a sarsa -p softmax -lr 0.2 -n 300
 
-<img src=https://github.com/sagittefrat/AI/blob/master/RL.png/>
+<img src=https://github.com/sagittefrat/AI/blob/master/images/RL.png/>
 
