@@ -32,7 +32,7 @@ Inverse temperature (beta) - inverse temperature increase
 
 the agent start from S and recives reward only when reaching to the goal-G
 
-* here you can see how choosing the right action can change the reward dramaticly - softmax policy vs random policy:
+* here you can see how choosing the right action can change the reward dramaticly:
 
 | softmax taking action policy   |  random action taking policy   | 
 | ------------- |:-------------: |
@@ -48,17 +48,25 @@ also notice, this results came from initializing the Q-table to zeros, try to in
 2 dimensional continous state space: (position, velocity) with one dimensional discrete actions space: (left, neutral, right)
 
 The *learning rate* will determine how much importance we give to new knowledge, giving it less importance can result in slower convergence, giving it high importance can lead to forgetting more and in case of noisy observation can result in inaccurate prediction
-* here you can see in Sarsa with Softmax at episode 125 how changing the Learning rate changes the system behaviour - learning rate-0.5 vs learning rate-0.1:
+* here you can see in **Sarsa with Softmax at episode 125** how changing the Learning rate changes the system behaviour:
 
-	<img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.5-video000125.gif" width="375" title="Initial agent"/> <img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.1-video000125.gif" width="375" title="Final agent 300 episodes"/> 
-	you can see that at episode 64 the car reaches the goal and Q-learn does that in less steps than sarsa.
+| learning rate - 0.5   |  learning rate - 0.1   | 
+| :-------------: |:-------------: |
+| <img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.5-video000125.gif" width="375" title="Initial agent"/>    | <img src="https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-softmax-sarsa-lr0.1-video000125.gif" width="375" title="Final agent 300 episodes"/>  |
+
+	 
+you can see that at episode 64 the car reaches the goal and Q-learn does that in less steps than sarsa.
 	
 The *number of episodes* will determine how much knowledge on the enviornment we recieve. As more exprience we expect better results (that can lead to overfitting) 	
-* Epsilon-greedy with Q-learn episode 8 vs Q-learn episode 64 vs Sarsa episode 64 (learning rate-0.1):
+* **Epsilon-greedy with learning rate - 0.1**:
 
-	<img src=https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-epsilon_greedy-q_learning-lr0.1-video000008.gif width="250" title="Initial agent"/>
-	<img src=https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-epsilon_greedy-q_learning-lr0.1-video000064.gif width="250" title="Final agent 100 episodes"/>
-	<img src=https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-epsilon_greedy-sarsa-lr0.1-video000064.gif width="250" title="Final agent 100 episodes"/>
+| Q-learn episode 8         | Q-learn episode 64           | Sarsa episode 64  |
+| :-------------: |:-------------:| :-----:|
+| <img src=https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-epsilon_greedy-q_learning-lr0.1-video000008.gif width="250" title="Initial agent"/>      | <img src=https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-epsilon_greedy-q_learning-lr0.1-video000064.gif width="250" title="Final agent 100 episodes"/> | <img src=https://github.com/sagittefrat/AI/blob/master/results/GIFs/results-QL-MountainCar-v0-epsilon_greedy-sarsa-lr0.1-video000064.gif width="250" title="Final agent 100 episodes"/> |
+
+	
+	
+	
 
 
 
