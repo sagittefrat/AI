@@ -14,6 +14,10 @@ Exploration rate (epsilon) -  exploration rate decay
 Inverse temperature (beta) - inverse temperature increase
 
 ### Algorithms:
+   In here we considered two algorithms for the Q-table update: Sarsa and Q-Learning.
+   
+   In Sarsa the agent takes first action, gets reward, pick the next action and then updates the results - meaning that at each state he
+   updates his policy. In Q-Learning the agent takes first state, gets reward and then picks the next action by following what he assumes the optimal policy, then updates. 
    
    <img src="https://github.com/sagittefrat/AI/blob/master/images/QL.png" />
 
