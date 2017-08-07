@@ -7,7 +7,11 @@ In this repository you can find different codes visuallizes how different learni
 
 We don't want to tell the agent what are the rules, instead we'll let him explore, if he get's to the goal than a reward is given and the agent will want to keep taking good steps to recieve more reward.
 When at state *s* it is important to take the right action *a* in order to get to the goal faster/ achieve more reward.
-The problem parameters: discount factor(gamma) - how much weight we want to give to future rewards? we will gwt these rewards only in the future so they dony worth as much as the rewards we gwt now.
+### RL parameters:
+Discount factor(gamma) - we will get some rewards only in the future, they don't worth as much as the rewards we get now so how much weight do we want to give them? 
+Learning rate (alpha) - 
+Exploration rate (epsilon) -  exploration rate decay
+Inverse temperature (beta) - inverse temperature increase
 
 ### Algorithms:
    
@@ -16,13 +20,7 @@ The problem parameters: discount factor(gamma) - how much weight we want to give
 ### Actions Choosing:
    
   <img src=https://github.com/sagittefrat/AI/blob/master/images/policy.png />	
- 
-### RL parameters:
-	exploration rate (epsilon), exploration rate decay
-	learning rate (alpha), learning rate decay
-	discount factor (gamma)
-	inverse temperature (beta), inverse temperature increase
-	
+ 	
 
 ### Enviornments:
 #### FrozenLake https://gym.openai.com/envs/FrozenLake-v0
