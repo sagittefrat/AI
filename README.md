@@ -32,7 +32,7 @@ Inverse temperature (beta) - inverse temperature increase
 
 the agent start from S and recives reward only when reaching to the goal-G
 
-* here you can see how choosing the right action can change the reward dramaticly:
+* Here you can see how choosing the right action can change the reward dramaticly:
 
 | softmax taking action policy   |  random action taking policy   | 
 | ------------- |:-------------: |
@@ -48,7 +48,7 @@ also notice, this results came from initializing the Q-table to zeros, try to in
 2 dimensional continous state space: (position, velocity) with one dimensional discrete actions space: (left, neutral, right)
 
 The *learning rate* will determine how much importance we give to new knowledge, giving it less importance can result in slower convergence, giving it high importance can lead to forgetting more and in case of noisy observation can result in inaccurate prediction
-* here you can see in **Sarsa with Softmax at episode 125** how changing the Learning rate changes the system behaviour:
+* Here you can see in ``Sarsa with Softmax at episode 125`` how changing the Learning rate changes the system behaviour:
 
 | learning rate - 0.5   |  learning rate - 0.1   | 
 | :-------------: |:-------------: |
@@ -58,7 +58,7 @@ The *learning rate* will determine how much importance we give to new knowledge,
 you can see that at episode 64 the car reaches the goal and Q-learn does that in less steps than sarsa.
 	
 The *number of episodes* will determine how much knowledge on the enviornment we recieve. As more exprience we expect better results (that can lead to overfitting) 	
-* **Epsilon-greedy with learning rate - 0.1**:
+* ``Epsilon-greedy with learning rate - 0.1``:
 
 | Q-learn episode 8         | Q-learn episode 64           | Sarsa episode 64  |
 | :-------------: |:-------------:| :-----:|
