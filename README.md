@@ -6,9 +6,11 @@
 In this repository you can find different codes visuallizes how different learning algorithms and parameters can change the solution to the RL problem.
 
 We don't want to tell the agent what are the rules, instead we'll let him explore, if he get's to the goal than a reward is given and the agent will want to keep taking good steps to recieve more reward.
+When at state *s* it is important to take the right action *a* in order to get to the goal faster/ achieve more reward.
+The problem parameters: discount factor(gamma) - how much weight we want to give to future rewards? we will gwt these rewards only in the future so they dony worth as much as the rewards we gwt now.
 
 ### Algorithms:
-    
+   
    <img src="https://github.com/sagittefrat/AI/blob/master/images/QL.png" />
 
 ### Actions Choosing:
@@ -28,7 +30,6 @@ We don't want to tell the agent what are the rules, instead we'll let him explor
 
 the agent start from S and recives reward only when reaching to the goal-G
 
-When at state *s* it is important to take the right action *a* in order to get to the goal faster/ achieve more reward.
 * here you can see how choosing the right action can change the reward dramaticly - softmax policy vs random policy:
 <img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Final agent 300 episodes"/> 
 as we expected, at the beggining explore more and towards the end exploit more is giving more reward than just exploring.
