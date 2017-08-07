@@ -33,9 +33,14 @@ Inverse temperature (beta) - inverse temperature increase
 the agent start from S and recives reward only when reaching to the goal-G
 
 * here you can see how choosing the right action can change the reward dramaticly - softmax policy vs random policy:
-<img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Initial agent"/><img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Final agent 300 episodes"/> 
+
+| softmax taking action policy   |  random action taking policy   | 
+| ------------- |:-------------: |
+| <img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-softmax-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Initial agent"/>     | <img src="https://github.com/sagittefrat/AI/blob/master/results/results-QL-FrozenLake-v0-random-sarsa-nepisode5000-lr0.1-zero/reward.png" width="420" title="Final agent 300 episodes"/>  |
+
 as we expected, at the beggining explore more and towards the end exploit more is giving more reward than just exploring.
 also notice, this results came from initializing the Q-table to zeros, try to initialize to the mean of Gaussian and see the much worse results..
+
 
 
 
