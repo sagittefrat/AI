@@ -1,5 +1,5 @@
 # based on https://github.com/dennybritz/reinforcement-learning/blob/35c5105fc403a883f869f429972b189360fea609/FA/Q-Learning%20with%20Value%20Function%20Approximation%20Solution.ipynb
-# need to test it again after mc0 finishes
+
 from MountainCar_QL_options import *
 
 env = wrappers.Monitor(env, result_dir, force=True)
